@@ -15,5 +15,5 @@ La herramienta tiene tres argumentos posibles:
 
 # Modulos que se necesitan
 
-Esta herramienta necesita **argparse** y **requests**, puede instarlas con
+Esta herramienta necesita **argparse**, **requests** y **colorama**, puede instarlas con
 `pip install -r requirements.txt`
