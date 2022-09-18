@@ -38,14 +38,17 @@ def peticion(fiat,tipo,cantidad):
     }
     data = {
         "asset": "USDT",
+        "countries": [],
         "fiat": fiat,
         "merchantCheck": True,
         "page": 1,
-        "payTypes": None,
+        "payTypes": [],
+        "proMerchantAds": False,
         "publisherType": None ,
         "rows": 20,
         "tradeType": tipo,
         "transAmount":  cantidad
+
     }
     r = requests.post(url, headers=headers, json=data)
     r = json.loads(r.text)
@@ -55,7 +58,7 @@ def peticion(fiat,tipo,cantidad):
 def imprimir_metodos_de_pago(metodos):
     todos_los_metodos = ""
     for i in metodos:
-        todos_los_metodos += i+' '
+        todos_los_metodos += i+' - '
     return todos_los_metodos
 
 
@@ -66,12 +69,11 @@ def procesar_peticion(r):
         metodos = []
         comerciante.append(i['adv']['price'])
         for k in i['adv']['tradeMethods']:
-            metodos.append(k['payType'])
+            metodos.append(k['tradeMethodName'])
         comerciante.append(metodos)
         comerciante.append(i['advertiser']['nickName'])
         comerciante.append(i['advertiser']['userNo'])
         lista_de_comerciantes.append(comerciante)
-
 
     print("COMERCIANTES")
     for i in range(len(lista_de_comerciantes)):
